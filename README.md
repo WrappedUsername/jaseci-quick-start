@@ -1,4 +1,4 @@
-# Jaseci Quick Start for WSL using Ubuntu - Not Official Docs
+# [Jaseci](https://docs.jaseci.org/) Quick Start for WSL using Ubuntu - Not Official Docs
 
 - *These are only my notes, not official docs here, official docs are found in the link provided above*
 
