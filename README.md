@@ -1,4 +1,12 @@
-# Jaseci Quick Start
+# Jaseci Quick Start for WSL using Ubuntu - Not Official Docs
+
+- *These are only my notes, not official docs here, official docs are found in the link provided above*
+
+- and [Official Jaseci Installation Guide Found Here](https://docs.jaseci.org/docs/docs/getting_started/installation)
+
+<p align="left">
+<img src="https://komarev.com/ghpvc/?username=jaseci-quick-start&label=Profile%20views&color=f79952&style=flat" alt="jaseci-quick-start" />
+</p>
 
 - Create .venv environment,
 
