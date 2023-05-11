@@ -247,9 +247,7 @@ dot -Tpdf main.dot -o main.pdf
 sudo service redis-server restart
 ```
 
-```yml
-Enter Jaseci runtime in memory:
-```
+- Enter Jaseci runtime in memory:
 
 ```bash
 jsctl -m
