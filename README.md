@@ -130,7 +130,7 @@ jsctl -m
 
 - Clone this repo into your new project folder!
 
-- Create this file: `training_data.json` in the root of your project,
+- Create this example file: `training_data.json` in the root of your project, (feel free to change this content to fit your business needs)
 
 ```json
 {
@@ -159,6 +159,21 @@ jsctl -m
         "can you describe what ebs is?"
     ]
 }
+```
+
+- If you do change this file make sure to change this content in the `dialogue.jac` file here:
+
+```typescript
+// change the pricing_state, name, and response
+pricing_state = spawn node::dialogue_state(
+    name = "ec2_price_method",
+    response = "EC2 offers five pricing options: On-Demand, Savings Plans, Reserved Instances, Spot price, and Dedicated Hosts pricing. Other costs include egress data transfers, premium support, and block storage costs."
+);
+// change the ebs_state, name, and response
+ebs_state = spawn node::dialogue_state(
+    name = "ebs_storage",
+    response = "An Amazon EBS volume is a durable, block-level storage device that you can attach to your instances."
+);
 ```
 
 - Create .venv environment,
