@@ -126,7 +126,7 @@ pip install jaseci
 jsctl -m
 ```
 
-## Quck start
+## Quick Start
 
 - Clone this repo into your new project folder!
 
