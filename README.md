@@ -8,6 +8,128 @@
 <img src="https://komarev.com/ghpvc/?username=jaseci-quick-start&label=Profile%20views&color=f79952&style=flat" alt="jaseci-quick-start" />
 </p>
 
+## Install Jaseci and dependencies
+
+To run commands for Jaseci we need a terminal that accepts bash arguments.
+
+- The official Jaseci docs recommend using the Ubuntu terminal that comes as the default with WSL.
+- To install WSL, first check if WSL is installed by running the following command in Windows powershell terminal,
+
+```bash
+wsl -l -v
+```
+
+- If nothing is returned like this,
+
+```powershell
+  NAME          STATE           VERSION
+* kali-linux    Stopped         2
+  Ubuntu        Running         2
+```
+
+- Run this in Windows powershell terminal to install WSL,
+
+```bash
+wsl --install
+```
+
+- Next restart your computer and open Ubuntu terminal
+- Once opened again, make sure Ubuntu is updated, and feel free to do this regularly,
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+## Add a new user to Ubuntu if you haven't already
+
+```bash
+sudo adduser your-username-here
+```
+
+- It will prompt you to enter a password, and you will not be able to see the password as you enter it, but it is there!
+- Once you have created your new user home, you can login using the `login` command,
+
+```bash
+login your-username-here
+```
+
+- Grant root permissions for this new user, use `visudo` to edit the sudoers file
+
+```bash
+root@YourComputerName:~# visudo
+```
+
+- Use down arrow key to scroll to the following section:
+
+```bash
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+```
+
+- Add your user name to this list below root, like this:
+
+```bash
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+YourUsernameHere! ALL=(ALL:ALL) ALL
+```
+
+- Press `Ctrl x` on your kewboard to exit, then press `y` to save, and click `Enter` to finish.
+
+## Verify the permission change
+
+Use `su` followed by `YourUsernameHere!` to switch to the new user account:
+
+```bash
+root@YourComputerName:~# su - YourUsernameHere!
+YourUsernameHere!@YourComputerName:~$
+```
+
+- Use `sudo -i` to verify that the user account can elevate permissions. At the prompt, enter the new user’s password:
+
+```bash
+YourUsernameHere!@YourComputerName:~$ sudo -i
+[sudo] password for YourUsernameHere!:
+root@YourComputerName:~#
+```
+
+- Use `whoami` to verify that you are currently the root user:
+
+```bash
+root@YourComputerName:~# whoami
+root
+```
+
+## Install Jaseci
+
+- Install Jaseci dependencies
+
+```bash
+apt-get install python3.10-dev python3-pip git g++ build-essential pkg-config cmake
+```
+
+- Install and upgrade pip to the latest
+
+```bash
+pip install --upgrade pip
+```
+
+- Install Jaseci
+
+```bash
+pip install jaseci
+```
+
+- Test the Jaseci install, to ensure our installation is working run,
+
+```bash
+jsctl -m
+```
+
+## Quck start
+
+- Clone this repo into your new project folder!
+
 - Create .venv environment,
 
 ```bash
@@ -15,13 +137,13 @@ virtualenv venv
 ```
 
 - Rename venv file to .venv
-- Activating `.venv`
+- Activate `.venv`
 
 ```bash
 source .venv/bin/activate
 ```
 
-- Start Redis server
+- Start the Redis server
 
 ```bash
 sudo service redis-server restart
@@ -71,31 +193,23 @@ dot -Tpdf main.dot -o main.pdf
 
 ## Training the bi-encoder model with the training data
 
-- If you are getting this error,
+- Training the bi-encoder model with the training data.
+
+- Starting the Redis server
 
 ```bash
-jaseci > jac run bi_enc.jac -walk train -ctx '{"train_file": "training_data.json"}'
-Saving shared model to : modeloutput
-shared model created
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.10/dist-packages/jac_nlp/bi_enc/bi_enc.py", line 186, in train
-    with open(t_config_fname, "w+") as jsonfile:
-PermissionError: [Errno 13] Permission denied: '/usr/local/lib/python3.10/dist-packages/jac_nlp/bi_enc/utils/train_config.json'
-2023-05-10 13:56:38,591 - ERROR - rt_error: bi_enc.jac:blank - line 10, col 43 - rule atom_trailer - Execption within action call bi_enc.train! 
-2023-05-10 13:56:38,591 - ERROR - rt_error: bi_enc.jac:train - line 10, col 43 - rule atom_trailer - Internal Exception: 
-{
-  "success": false,
-  "report": [],
-  "final_node": "urn:uuid:e8bfb046-3719-4037-9874-456ff6790fc1",
-  "yielded": false,
-  "errors": [
-    "bi_enc.jac:train - line 10, col 43 - rule atom_trailer - Internal Exception: ",
-    "bi_enc.jac:blank - line 10, col 43 - rule atom_trailer - Execption within action call bi_enc.train! "
-  ]
-}
+sudo service redis-server restart
 ```
 
-- Try this,
+```bash
+jsctl -m
+```
+
+```bash
+actions load module jac_nlp.bi_enc
+```
+
+- Exit Jaseci, and run the following command,
 
 ```bash
 (venv) wrappedusername@Arrakis:~/jaseci-quick-start$ sudo jsctl -m jac run bi_enc.jac -walk train -ctx '{"train_file": "training_data.json"}'
@@ -116,4 +230,16 @@ shared model created
             Epoch : 1
             loss : 0.14623326311508814
             LR : 0.0002307692307692308
+```
+
+- The training epoch is set in the bi_enc.jac file, I set this to 100.
+
+```bash
+Epoch: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [01:20<00:00,  1.25batch/s]
+{
+  "success": true,
+  "report": [],
+  "final_node": "urn:uuid:faed4ef8-45b8-4fd1-b18c-5f2a467f8b66",
+  "yielded": false
+}
 ```
