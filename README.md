@@ -239,7 +239,7 @@ dot -Tpdf main.dot -o main.pdf
 
 ## Training the bi-encoder model with the training data
 
-- Train the bi-encoder model with the training data using the follwing commands:
+- Train the bi-encoder model with the training data using the following commands:
 
 - Starting the Redis server
 
