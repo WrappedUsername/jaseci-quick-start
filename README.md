@@ -247,6 +247,10 @@ dot -Tpdf main.dot -o main.pdf
 sudo service redis-server restart
 ```
 
+```yml
+Enter Jaseci runtime in memory:
+```
+
 ```bash
 jsctl -m
 ```
@@ -256,6 +260,14 @@ actions load module jac_nlp.bi_enc
 ```
 
 - Exit Jaseci, and run the following command,
+
+```bash
+sudo jsctl -m jac run bi_enc.jac -walk train -ctx '{"train_file": "training_data.json"}'
+```
+
+```yml
+You should see something like this:
+```
 
 ```bash
 (venv) wrappedusername@Arrakis:~/jaseci-quick-start$ sudo jsctl -m jac run bi_enc.jac -walk train -ctx '{"train_file": "training_data.json"}'
