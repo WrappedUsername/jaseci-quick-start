@@ -288,7 +288,21 @@ shared model created
             LR : 0.0002307692307692308
 ```
 
-- The training epoch is set in the bi_enc.jac file, I set this to 100.
+- The training epoch is set in the `bi_enc.jac` file in the `walker train`, 
+
+```typescript
+walker train {
+    has train_file;
+    has num_train_epochs = 100, from_scratch = true, model_name = "";
+    root {
+        spawn here ++> node::bi_enc;
+        take --> node::bi_enc;
+    }
+    bi_enc: here::train;
+}
+```
+
+- I set this to 100.
 
 ```bash
 Epoch: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [01:20<00:00,  1.25batch/s]
