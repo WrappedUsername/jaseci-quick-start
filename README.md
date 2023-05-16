@@ -257,10 +257,10 @@ jsctl -m
 actions load module jac_nlp.bi_enc
 ```
 
-- Exit Jaseci, and run the following command,
+- Run the following command,
 
 ```bash
-sudo jsctl -m jac run bi_enc.jac -walk train -ctx '{"train_file": "training_data.json"}'
+jac run bi_enc.jac -walk train -ctx '{"train_file": "training_data.json"}'
 ```
 
 ```yml
@@ -268,8 +268,7 @@ You should see something like this:
 ```
 
 ```bash
-(venv) wrappedusername@Arrakis:~/jaseci-quick-start$ sudo jsctl -m jac run bi_enc.jac -walk train -ctx '{"train_file": "training_data.json"}'
-[sudo] password for wrappedusername:
+jaseci > jac run bi_enc.jac -walk train -ctx '{"train_file": "training_data.json"}'
 2023-05-10 14:05:27,231 - WARNING - rt_warn: bi_enc.jac:bi_enc.jac - line 2, col 4 - rule can_stmt - Attempting auto-load for bi_enc.train
 2023-05-10 14:05:27.381448: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
 2023-05-10 14:05:27.432466: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
@@ -312,4 +311,10 @@ Epoch: 100%|██████████████████████�
   "final_node": "urn:uuid:faed4ef8-45b8-4fd1-b18c-5f2a467f8b66",
   "yielded": false
 }
+```
+
+- Infer the model
+
+```bash
+jac run bi_enc.jac -walk infer -ctx '{"labels": ["pricing categories", "ebs storage"]}'
 ```
