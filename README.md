@@ -318,3 +318,21 @@ Epoch: 100%|██████████████████████�
 ```bash
 jac run bi_enc.jac -walk infer -ctx '{"labels": ["pricing categories", "ebs storage"]}'
 ```
+
+- Save the model
+
+```bash
+jac run bi_enc.jac -walk save_model -ctx '{"model_path": "dialogue_intent_model"}'
+```
+
+- Load the model
+
+```bash
+jac run bi_enc.jac -walk load_model -ctx '{"model_path": "dialogue_intent_model"}'
+```
+
+- Running the Chatbot Example
+
+```bash
+jac run main.jac
+```
